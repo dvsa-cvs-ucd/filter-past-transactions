@@ -1,0 +1,93 @@
+<div class="govuk-caption-m">S & S Motors - ATF P60037</div>
+<h2 class="govuk-heading-l govuk-!-margin-bottom-2">Past transactions</h2>
+<div class="govuk-caption-m govuk-!-margin-bottom-4">Account C01510</div>
+
+<h3 id="date-range-heading" class="govuk-body-l">
+  <strong>3 October 2024 to 24 October 2024</strong>
+</h3>
+
+{% set filterOptionsHtml %}
+  {{ govukCheckboxes({
+    idPrefix: 'type',
+    name: 'type',
+    classes: "govuk-checkboxes--small",
+    fieldset: {
+      legend: {
+        text: 'Type',
+        classes: 'govuk-fieldset__legend--m'
+      }
+    },
+    items: data.pastTransactions | countCheckboxItems('type', data.activeFilters)
+  }) }}
+{% endset %}
+
+<form action='/apply-filters'>
+{{ mojFilter({
+  heading: {
+    text: 'Filter transactions'
+  },
+
+  submit: {
+    attributes: {
+        "data-test-id": "submit-button"
+    }
+  },
+
+  selectedFilters: {
+
+    heading: {
+      text: 'Selected filters'
+    },
+
+    categories: [
+      {
+        heading: {
+          text: 'Type'
+        },
+        items: data.activeFilters | removalLinks
+      }
+    ]
+  },
+  optionsHtml: filterOptionsHtml
+}) }}
+</form>
+
+<hr class="govuk-section-break--visible govuk-!-margin-top-7 govuk-!-margin-bottom-7">
+
+{{
+  govukButton({
+    text: 'Download selected transactions',
+    classes: 'govuk-button--secondary'
+  })
+}}
+
+<table role="table" aria-describedby="date-range-heading" class="govuk-table-card" data-module="moj-multi-select" data-multi-select-checkbox="#select-all">
+    <thead role="rowgroup">
+        <tr role="row">
+            <th class="govuk-table__header" scope="col" id="select-all"></th>
+            <th role="columnheader" scope="col">Date</th>
+            <th role="columnheader" scope="col">Item</th>
+            <th role="columnheader" scope="col" class="govuk-table__header--numeric">Amount</th>
+            <th role="columnheader" scope="col">Balance</th>   
+        </tr>
+    </thead>
+    <tbody role="rowgroup">
+      {% for row in data.pastTransactions | filterObjectList('type', data.activeFilters) %}
+        <tr role="row">
+            <td class="govuk-table__cell" role="cell">
+              <span class="govuk-table-card-inline-label">Select</span>
+              <div class="govuk-checkboxes__item govuk-checkboxes--small moj-multi-select__checkbox">
+                <input type="checkbox" class="govuk-checkboxes__input" id="{{row.type}}-{{row.date | replace(' ', '-') | lower}}" checked>
+                <label class="govuk-label govuk-checkboxes__label" for="{{row.type}}-{{row.date | replace(' ', '-') | lower}}">
+                  <span class="govuk-visually-hidden">Select {{ row.type }} from {{ row.date }}</span>
+                </label>
+              </div>
+            </td>
+            <td role="cell"><span class="govuk-table-card-inline-label" aria-hidden="true">Date</span> {{ row.date}}</td>
+            <td role="cell"><span class="govuk-table-card-inline-label" aria-hidden="true">Item</span> <a href="#" class="govuk-link govuk-link--no-visited-state">{{ row.item }}</a> </td>
+            <td role="cell" class="govuk-table__cell--numeric"><span class="govuk-table-card-inline-label" aria-hidden="true">Amount</span> {{ row.amount | currency }}</td>
+            <td role="cell"><span class="govuk-table-card-inline-label" aria-hidden="true">Balance</span> {{ row.balance | currency }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+</table>

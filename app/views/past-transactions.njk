@@ -1,0 +1,90 @@
+{% set singleDate %}
+{{ govukDateInput({
+  id: 'single-date',
+  name: 'single-date',
+  fieldset: {
+    legend: {
+      text: 'Single date',
+      classes: 'govuk-visually-hidden'
+    }
+  },
+  hint: {
+    text: 'For example 3 9 2021'
+    }
+})}}
+{% endset %}
+
+{% set rangeOfDates %}
+<div class="govuk-date-range">
+  {{ govukDateInput({
+    id: 'from-date',
+    name: 'from-date',
+    fieldset: {
+      legend: {
+        text: 'From'
+      }
+    },
+    hint: {
+      text: 'For example 3 9 2021'
+    }
+  })}}
+  {{ govukDateInput({
+    id: 'to-date',
+    name: 'to-date',
+    fieldset: {
+      legend: {
+        text: 'To'
+      }
+    },
+    hint: {
+      text: 'For example 3 9 2021'
+    }
+  })}}
+</div>
+{% endset %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <form action="{{ tab.completePath + '/search-results' }}">
+      <fieldset class="govuk-fieldset govuk-!-margin-bottom-7">
+        <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+          <div class="govuk-caption-m">S & S Motors - ATF P60037</div>
+          <h2 class="govuk-heading-l govuk-!-margin-bottom-2">Search past transactions</h2>
+          <div class="govuk-caption-m">Account C01510</div>
+        </legend>
+
+        {{
+          govukRadios({
+            name: 'search-past-transactions',
+            id: 'search-past-transactions',
+            items: [
+              {
+                value: "a-single-date",
+                text: "Select a single date",
+                conditional: {
+                  html: singleDate
+                },
+                checked: 'checked'
+              },
+              {
+                value: "a-period-of-time",
+                text: "Select a period of time",
+                conditional: {
+                  html: rangeOfDates
+                }
+              }
+            ]
+          })
+        }}
+      </fieldset>
+    {{ govukInsetText({
+      text: 'Past transactions will only be available for dates after you started using the Manage your vehicle testing service.'
+    }
+    )}}
+    {{
+    govukButton({
+      text: 'Search'
+    })
+    }}
+    </form>
+  </div>
+</div>

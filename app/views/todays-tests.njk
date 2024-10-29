@@ -1,0 +1,10 @@
+<div class="govuk-caption-m">S & S Motors - ATF P60037</div>
+<h2 class="govuk-heading-l govuk-!-margin-bottom-2">{{'Today' | today}}</h2>
+<div class="govuk-caption-m govuk-!-margin-bottom-4">Account C01510</div>
+<p aria-live="polite" aria-atomic="true" aria-relevant="text" class="govuk-body-l">Today's running total (ex. VAT): <strong data-runningtotal="s-&amp;-s-motors">£0.00</strong></p>
+<p class="govuk-body-l">To be charged at the end of today's testing.</p>
+{{
+  govukWarningText({
+  text: 'There are no testing activities currently recorded for today'
+  })
+}}
