@@ -54,14 +54,22 @@
 
 <hr class="govuk-section-break--visible govuk-!-margin-top-7 govuk-!-margin-bottom-7">
 
+<div class="govuk-button-group">
 {{
   govukButton({
-    text: 'Download selected transactions',
+    text: 'Download this statement (CSV)',
+    classes: 'govuk-button--secondary'
+  })
+}}
+{{
+  govukButton({
+    text: 'Download selected items (PDF)',
     classes: 'govuk-button--secondary'
   })
 }}
 
 <table role="table" aria-describedby="date-range-heading" class="govuk-table-card" data-module="moj-multi-select" data-multi-select-checkbox="#select-all">
+{# <table role="table" aria-describedby="date-range-heading" class="govuk-table-card"> #}
     <thead role="rowgroup">
         <tr role="row">
             <th class="govuk-table__header" scope="col" id="select-all"></th>
@@ -77,7 +85,7 @@
             <td class="govuk-table__cell" role="cell">
               <span class="govuk-table-card-inline-label">Select</span>
               <div class="govuk-checkboxes__item govuk-checkboxes--small moj-multi-select__checkbox">
-                <input type="checkbox" class="govuk-checkboxes__input" id="{{row.type}}-{{row.date | replace(' ', '-') | lower}}" checked>
+                <input type="checkbox" class="govuk-checkboxes__input" id="{{row.type}}-{{row.date | replace(' ', '-') | lower}}">
                 <label class="govuk-label govuk-checkboxes__label" for="{{row.type}}-{{row.date | replace(' ', '-') | lower}}">
                   <span class="govuk-visually-hidden">Select {{ row.type }} from {{ row.date }}</span>
                 </label>

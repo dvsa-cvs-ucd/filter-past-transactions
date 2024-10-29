@@ -21,7 +21,7 @@ module.exports = {
       ]
     }
   ],
-  activeFilters: ['credit memo', 'invoice'],
+  activeFilters: ['credit memo', 'invoice', 'payment'],
   pastTransactions: [
     {
       "date": "24 October 2024",
