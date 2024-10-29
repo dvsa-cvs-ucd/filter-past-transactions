@@ -57,7 +57,8 @@
    }
 
    & tr {
-     @extend .govuk-table__row !optional;
+    @extend .govuk-table__row !optional;
+    position: relative;
    }
 
    & th {
@@ -83,5 +84,52 @@
 
    & .govuk-table-card-inline-label {
      display: none;
+   }
+ }
+
+ .govuk-table-row__icon {
+    box-sizing: border-box;
+    left: 0;
+    font-weight: 700;
+    display: inline-block;
+    
+    
+    min-width: 35px;
+    min-height: 35px;
+    margin-top: -7px;
+    vertical-align: middle;
+    margin-right: govuk-spacing(2);
+    
+    @include govuk-media-query($from: tablet) {
+      position: absolute;
+     transform: translateX(calc(govuk-spacing(8)* -1)) translateY(25%);
+     margin-top: -5px;
+   }
+
+   // When a user customises their colours the background colour will often be
+   // removed. Adding a border to the component keeps it's shape as a circle.
+   border: 3px solid $govuk-text-colour;
+   border-radius: 50%;
+
+   color: $govuk-body-background-colour;
+   background: $govuk-text-colour;
+
+   font-size: 30px;
+   line-height: 29px;
+
+   text-align: center;
+
+   // Prevent the exclamation mark from being included when the warning text
+   // is copied, for example.
+   user-select: none;
+
+   // Improve rendering in Windows High Contrast Mode (Edge), where a
+   // readability backplate behind the exclamation mark obscures the circle
+   forced-color-adjust: none;
+
+   @media screen and (forced-colors: active) {
+     border-color: windowText;
+     color: windowText;
+     background: transparent;
    }
  }

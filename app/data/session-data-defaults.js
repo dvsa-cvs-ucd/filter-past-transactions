@@ -28,6 +28,7 @@ module.exports = {
       "item": "Payment - CVS0-01-20241024-083319-62CDB835",
       "amount": 9900,
       "balance": 10000,
+      "flagged": false,
       "type": "payment"
     },
     {
@@ -35,6 +36,7 @@ module.exports = {
       "item": "Invoice - INV-000000647",
       "amount": -120,
       "balance": 9880,
+      "flagged": true,
       "type": "invoice"
     },
     {
@@ -42,6 +44,7 @@ module.exports = {
       "item": "Credit Memo - CRE-100000068",
       "amount": 150,
       "balance": 10030,
+      "flagged": false,
       "type": "credit memo"
     },
     {
@@ -49,6 +52,7 @@ module.exports = {
       "item": "Payment - CVS0-01-20241020-083319-62CDB836",
       "amount": 3000,
       "balance": 7030,
+      "flagged": false,
       "type": "payment"
     },
     {
@@ -56,6 +60,7 @@ module.exports = {
       "item": "Credit Memo - CRE-100000065",
       "amount": 100,
       "balance": 4030,
+      "flagged": false,
       "type": "credit memo"
     },
     {
@@ -63,6 +68,7 @@ module.exports = {
       "item": "Invoice - INV-000000648",
       "amount": -500,
       "balance": 3930,
+      "flagged": false,
       "type": "invoice"
     },
     {
@@ -70,6 +76,7 @@ module.exports = {
       "item": "Credit Memo - CRE-100000064",
       "amount": 120,
       "balance": 4430,
+      "flagged": false,
       "type": "credit memo"
     },
     {
@@ -77,6 +84,7 @@ module.exports = {
       "item": "Invoice - INV-000000646",
       "amount": -250,
       "balance": 4310,
+      "flagged": false,
       "type": "invoice"
     },
     {
@@ -84,6 +92,7 @@ module.exports = {
       "item": "Payment - CVS0-01-20241006-083319-62CDB837",
       "amount": 2000,
       "balance": 4560,
+      "flagged": false,
       "type": "payment"
     },
     {
@@ -91,6 +100,7 @@ module.exports = {
       "item": "Credit Memo - CRE-100000063",
       "amount": 120,
       "balance": 2560,
+      "flagged": false,
       "type": "credit memo"
     }
   ]

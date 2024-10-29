@@ -19,6 +19,8 @@ addFilter('currency', string => new Intl.NumberFormat('en-GB', { style: 'currenc
 
 addFilter('filterObjectList', (list, key, filters) => list.filter(item => filters.indexOf(item[key]) > -1))
 
+addFilter('flaggedItems', (list, key) => list.some(item => item[key]))
+
 addFilter('countCheckboxItems', function (arr, key, filters) {
     const counts = arr.reduce((acc, obj) => {
       const value = obj[key];

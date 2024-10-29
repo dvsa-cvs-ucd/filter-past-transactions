@@ -84,14 +84,14 @@
         <tr role="row">
             <td class="govuk-table__cell" role="cell">
               <span class="govuk-table-card-inline-label">Select</span>
-              <div class="govuk-checkboxes__item govuk-checkboxes--small moj-multi-select__checkbox">
-                <input type="checkbox" class="govuk-checkboxes__input" id="{{row.type}}-{{row.date | replace(' ', '-') | lower}}">
-                <label class="govuk-label govuk-checkboxes__label" for="{{row.type}}-{{row.date | replace(' ', '-') | lower}}">
+              <div class="govuk-checkboxes__item govuk-checkboxes--small moj-multi-select__checkbox govuk-!-padding-0">
+                <input type="checkbox" class="govuk-checkboxes__input govuk-!-padding-0" id="{{row.type}}-{{row.date | replace(' ', '-') | lower}}">
+                <label class="govuk-label govuk-checkboxes__label govuk-!-padding-0" for="{{row.type}}-{{row.date | replace(' ', '-') | lower}}">
                   <span class="govuk-visually-hidden">Select {{ row.type }} from {{ row.date }}</span>
                 </label>
               </div>
             </td>
-            <td role="cell"><span class="govuk-table-card-inline-label" aria-hidden="true">Date</span> {{ row.date}}</td>
+            <td role="cell" {% if row.flagged %}class="govuk-!-font-weight-bold"{% endif%}><span class="govuk-table-card-inline-label" aria-hidden="true">Date</span> <span>{% if row.flagged %}<span class="govuk-table-row__icon" aria-hidden="true">!</span>{% endif %} {{ row.date}}</span></td>
             <td role="cell"><span class="govuk-table-card-inline-label" aria-hidden="true">Item</span> <a href="#" class="govuk-link govuk-link--no-visited-state">{{ row.item }}</a> </td>
             <td role="cell" class="govuk-table__cell--numeric"><span class="govuk-table-card-inline-label" aria-hidden="true">Amount</span> {{ row.amount | currency }}</td>
             <td role="cell"><span class="govuk-table-card-inline-label" aria-hidden="true">Balance</span> {{ row.balance | currency }}</td>
@@ -99,3 +99,14 @@
       {% endfor %}
     </tbody>
 </table>
+{% if data.pastTransactions | filterObjectList('type', data.activeFilters) | flaggedItems('flagged') %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    {{
+      govukWarningText({
+      text:'Invoices marked in the above table were posted on a different date than when they were created.'
+      })
+    }}
+  </div>
+</div>
+{% endif %}
