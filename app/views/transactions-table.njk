@@ -73,7 +73,7 @@
     <thead role="rowgroup">
         <tr role="row">
             <th class="govuk-table__header" scope="col" id="select-all"></th>
-            <th role="columnheader" scope="col">Date</th>
+            <th role="columnheader" scope="col">Date created</th>
             <th role="columnheader" scope="col">Item</th>
             <th role="columnheader" scope="col" class="govuk-table__header--numeric">Amount</th>
             <th role="columnheader" scope="col">Balance</th>   
@@ -91,7 +91,7 @@
                 </label>
               </div>
             </td>
-            <td role="cell" {% if row.flagged %}class="govuk-!-font-weight-bold"{% endif%}><span class="govuk-table-card-inline-label" aria-hidden="true">Date</span> <span>{% if row.flagged %}<span class="govuk-table-row__icon" aria-hidden="true">!</span>{% endif %} {{ row.date}}</span></td>
+            <td role="cell" {% if row.flagged %}class="govuk-!-font-weight-bold"{% endif%}><span class="govuk-table-card-inline-label" aria-hidden="true">Date</span> <span>{% if row.flagged %}<span class="govuk-table-row__icon" aria-label="Created and posted dates do not match">!</span>{% endif %} {{ row.date}}</span></td>
             <td role="cell"><span class="govuk-table-card-inline-label" aria-hidden="true">Item</span> <a href="#" class="govuk-link govuk-link--no-visited-state">{{ row.item }}</a> </td>
             <td role="cell" class="govuk-table__cell--numeric"><span class="govuk-table-card-inline-label" aria-hidden="true">Amount</span> {{ row.amount | currency }}</td>
             <td role="cell"><span class="govuk-table-card-inline-label" aria-hidden="true">Balance</span> {{ row.balance | currency }}</td>
@@ -104,7 +104,7 @@
   <div class="govuk-grid-column-two-thirds">
     {{
       govukWarningText({
-      text:'Invoices marked in the above table were posted on a different date than when they were created.'
+      html:'<p class="govuk-!-font-weight-bold">For marked invoices, the date created is different to the date they were posted.</p><p class="govuk-!-font-weight-bold">This is because there were incorrect items in the invoice, which are now resolved.</p>'
       })
     }}
   </div>
